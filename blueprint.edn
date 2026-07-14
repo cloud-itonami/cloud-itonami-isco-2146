@@ -1,0 +1,11 @@
+[{:itonami.blueprint/social-impact [:ore-processing-optimization :metallurgical-safety :site-assessment :process-efficiency]
+  :itonami.blueprint/domain :engineering/metallurgical
+  :itonami.blueprint/required-technologies [:robotics :identity :forms :dmn :bpmn :audit-ledger]
+  :itonami.blueprint/isco-08 "2146"
+  :itonami.blueprint/name "Mining Engineers, Metallurgists and Related Professionals"
+  :itonami.blueprint/governor :mining-engineer-governor
+  :itonami.blueprint/robotics true
+  :db/id -1
+  :itonami.blueprint/status :public-oss
+  :itonami.blueprint/id "cloud-itonami-isco-2146"
+  :itonami.blueprint/license "AGPL-3.0-or-later"}]
