@@ -12,6 +12,9 @@
   and local deployment). Swap for Datomic/kotoba-server without touching
   actor or governor.")
 
+#?(:clj (defn- now-ms [] (System/currentTimeMillis)))
+#?(:cljs (defn- now-ms [] (js/Date.now)))
+
 (defprotocol Store
   "Protocol for engineer record storage and audit ledger."
   (engineer [store engineer-id]
@@ -51,7 +54,7 @@
       (swap! engineers-atom assoc eng-id engineer-record)
       (append-ledger! store {:type :engineer-registered
                              :engineer-id eng-id
-                             :timestamp (System/currentTimeMillis)})
+                             :timestamp (now-ms)})
       engineer-record))
 
   (register-site! [store site-record]
@@ -59,11 +62,11 @@
       (swap! sites-atom assoc site-id site-record)
       (append-ledger! store {:type :site-registered
                              :site-id site-id
-                             :timestamp (System/currentTimeMillis)})
+                             :timestamp (now-ms)})
       site-record))
 
   (log-record! [store record-type record-data]
-    (let [record (assoc record-data :record-type record-type :timestamp (System/currentTimeMillis))]
+    (let [record (assoc record-data :record-type record-type :timestamp (now-ms))]
       (swap! records-atom conj record)
       (append-ledger! store {:type :record-logged :record-type record-type :record-id (:id record)})
       record))
