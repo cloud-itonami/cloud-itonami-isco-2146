@@ -14,6 +14,9 @@
   - Return nil + confidence 0.0 on parse/semantic errors (forces escalation)
   ")
 
+#?(:clj (defn- now-ms [] (System/currentTimeMillis)))
+#?(:cljs (defn- now-ms [] (js/Date.now)))
+
 (defprotocol Advisor
   "Protocol for generating engineering proposals."
   (-advise [advisor store request]
@@ -54,7 +57,7 @@
          :op :log-site-data
          :confidence 0.95
          :details {:data-type (:data-type params "assay")
-                   :logged-at (:timestamp params (System/currentTimeMillis))
+                   :logged-at (:timestamp params (now-ms))
                    :summary (:summary params {})}
          :reasoning "Site data logged for analyst review"}
 
