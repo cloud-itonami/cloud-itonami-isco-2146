@@ -92,22 +92,22 @@ Proposals that pass all checks proceed to `:commit` without interruption.
                                         └─→ :hold              (hard)
 ```
 
-- `src/mining_engineers/store.cljc` — `Store` protocol + `MemStore`:
+- `src/mining_engineers/store.kotoba` — `Store` protocol + `MemStore`:
   registered engineers, registered mine-sites, committed records, append-only audit ledger.
-- `src/mining_engineers/advisor.cljc` — `Advisor` protocol; `mock-advisor`
+- `src/mining_engineers/advisor.kotoba` — `Advisor` protocol; `mock-advisor`
   (deterministic, default) proposes an engineering operation from a
   request; `llm-advisor` wraps a `langchain.model/ChatModel` — either
   way the advisor only ever produces a `:propose`-effect proposal,
   never a committed design, and LLM parse failures always yield
   `confidence 0.0` (forces escalation, never fabricated confidence).
-- `src/mining_engineers/governor.cljc` — `MiningEngineerGovernor/check`: a pure
+- `src/mining_engineers/governor.kotoba` — `MiningEngineerGovernor/check`: a pure
   function, wired as its own `:govern` node. Hard invariants
   (unregistered engineer, unregistered mine-site, a proposal whose `:effect`
   isn't `:propose`, or any licensed-engineer-exclusive op) always route to `:hold`.
   Escalation invariants (`:flag-safety-risk`, high-risk site operations, or low advisor
   confidence) always route to `:request-approval` — an `interrupt-before` node that the graph
   checkpoints and only resumes on explicit human approval (`actor/approve!`).
-- `src/mining_engineers/actor.cljc` — `build-graph`, `run-request!`,
+- `src/mining_engineers/actor.kotoba` — `build-graph`, `run-request!`,
   `approve!`: the `langgraph.graph/state-graph` wiring itself.
 
 ## Reference implementation (`:maturity :implemented`)
