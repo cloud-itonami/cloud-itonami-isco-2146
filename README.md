@@ -118,7 +118,7 @@ section): a real [`kotoba-lang/langgraph`](https://github.com/kotoba-lang/langgr
 human-in-the-loop interrupt/resume via checkpointing.
 
 ```bash
-clojure -M:test
+kbb -M:test
 ```
 
 This is what backs this repo's `:maturity :implemented` entry in
