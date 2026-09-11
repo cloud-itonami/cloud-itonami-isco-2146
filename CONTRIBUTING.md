@@ -17,7 +17,7 @@ Any proposal that extends the actor's operations or modifies the governor rules 
 All changes must be accompanied by tests. Run the test suite before submitting:
 
 ```bash
-clojure -M:test
+kbb -M:test
 ```
 
 ## Code Style
