@@ -1,0 +1,34 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README: an ISCO 2146 Mining Engineers, Metallurgists and Related
+;; Professionals blueprint (no "Robotics premise" section). The physical work
+;; of the trade: the shell of a metallurgical furnace behind its insulating
+;; lining, and a sampling robot hauling ore sample bags along a mine drive.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-2146"
+ :cases
+ [{:id :furnace-lining-shell
+   :kind :thermal
+   :procedure "robot reads the steel shell temperature behind an insulating-firebrick lining after a day with the hot face at 1200 C"
+   :params {:conductivity-w-mk 0.5 :density-kg-m3 1000.0 :specific-heat-j-kgk 1000.0
+            :t0-c 30.0 :t-hot-c 1200.0 :front-fixed? true
+            :t-back-ambient-c 30.0 :h-back-w-m2k 15.0
+            :threshold-c 200.0 :duration-s 86400.0 :nodes 11}
+   :sweep {:param :thickness-m :values [0.10 0.15 0.20 0.25 0.30]}
+   :quantity :final-back-c
+   :limit {:max 200.0 :basis "estimate: 200 C taken as a shell temperature a carbon-steel furnace casing tolerates in service"}
+   :boundary {:lo 0.05 :hi 0.4}}
+  {:id :ore-sample-haul
+   :kind :transport
+   :procedure "sampling robot hauls bagged ore samples 200 m along a wet mine drive to the sample station"
+   :params {:mass-kg 150.0 :distance-m 200.0 :v-max-mps 1.2 :a-max-mps2 0.4
+            :brake-decel-mps2 1.0 :drive-force-n 400.0 :crr 0.05
+            :cog-height-m 0.5 :support-half-length-m 0.4}
+   :sweep {:param :payload-kg :values [50.0 150.0 300.0 450.0 600.0]}
+   :quantity :cycle-time-s
+   :limit {:max 240.0 :basis "estimate: four minutes per haul keeps pace with the face sampling crew"}
+   :boundary {:lo 10.0 :hi 800.0}}]}
