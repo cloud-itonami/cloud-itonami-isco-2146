@@ -112,7 +112,7 @@ Proposals that pass all checks proceed to `:commit` without interruption.
 
 ## Reference implementation (`:maturity :implemented`)
 
-Full itonami Actor pattern (per ADR-2607011000 / CLAUDE.md's Actors
+Full itonami Actor pattern (per ADR-2607011000 / AGENTS.md's Actors
 section): a real [`kotoba-lang/langgraph`](https://github.com/kotoba-lang/langgraph)
 `StateGraph`, with the Advisor and Governor as distinct graph nodes and
 human-in-the-loop interrupt/resume via checkpointing.

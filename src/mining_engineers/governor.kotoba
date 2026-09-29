@@ -4,7 +4,7 @@
   Wired as its own `:govern` node in `mining-engineers.actor`'s StateGraph,
   downstream of `:advise` — the Advisor has no notion of engineer/site provenance
   or licensed-engineer-exclusive operations, so this MUST be a separate system
-  able to reject a proposal (itonami actor pattern, per ADR-2607011000 / CLAUDE.md
+  able to reject a proposal (itonami actor pattern, per ADR-2607011000 / AGENTS.md
   Actors section).
 
   CRITICAL DOMAIN NOTE: This actor drafts and prepares engineering analysis
